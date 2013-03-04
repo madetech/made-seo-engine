@@ -22,16 +22,14 @@ module Seo
   end
 
   def self.associated_seo_objects
+    require File.join(Seo::Engine.root, 'app', 'concerns', 'seo')
+
     Seo.config.associate_objects.each do |obj|
       obj.class_eval do
+        include Seo::SeoConcerns
+
         has_one                         :meta, :class_name => Seo::Meta, :as => :meta_data
         accepts_nested_attributes_for   :meta
-
-        #TODO: make this more dynamic, risk of being overwritten
-        private
-        def mass_assignment_authorizer(role = :default)
-          super + [:meta, :meta_attributes]
-        end
       end
     end
   end

@@ -1,6 +1,9 @@
 require "seo/engine"
 
 module Seo
+  mattr_accessor :associate_objects
+  @@associate_objects = []
+
   class Engine < Rails::Engine
     isolate_namespace Seo
 
@@ -14,11 +17,8 @@ module Seo
   end
 
   def self.config(&block)
-    @@config ||= Seo::Engine::Configuration.new
-
-    yield @@config if block
-
-    return @@config
+    yield self if block
+    return self
   end
 
   def self.associated_seo_objects

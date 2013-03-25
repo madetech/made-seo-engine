@@ -27,6 +27,7 @@ module Seo
     Seo.config.associate_objects.each do |obj|
       obj.class_eval do
         include Seo::SeoConcerns
+        include Seo::Sitemappable
 
         has_one                         :meta, :class_name => Seo::Meta, :as => :meta_data
         accepts_nested_attributes_for   :meta

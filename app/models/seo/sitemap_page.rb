@@ -1,4 +1,4 @@
-module Sitemap
+module Seo
   class SitemapPage < ActiveRecord::Base
     attr_accessible         :url,
                             :created_at,

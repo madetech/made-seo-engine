@@ -1,8 +1,15 @@
 require "seo/engine"
+require File.join(Seo::Engine.root, 'app', 'concerns', 'seo')
 
 module Seo
-  mattr_accessor :associate_objects
-  @@associate_objects = []
+  mattr_accessor :sitemap_sweeper
+  @@sitemap_sweeper = false
+
+  mattr_accessor :meta_objects
+  @@meta_objects = []
+
+  mattr_accessor :sitemap_objects
+  @@sitemap_objects = []
 
   class Engine < Rails::Engine
     isolate_namespace Seo
@@ -10,8 +17,12 @@ module Seo
     initializer :seo do
       ActiveAdmin.application.load_paths.unshift Dir[Seo::Engine.root.join('app', 'admin')] if defined?(ActiveAdmin)
 
-      if !Seo.config.associate_objects.blank?
-        Seo.associated_seo_objects
+      if !Seo.config.meta_objects.blank?
+        Seo.associate_meta_objects
+      end
+
+      if !Seo.config.sitemap_objects.blank?
+        Seo.associate_sitemap_objects
       end
     end
   end
@@ -21,16 +32,21 @@ module Seo
     return self
   end
 
-  def self.associated_seo_objects
-    require File.join(Seo::Engine.root, 'app', 'concerns', 'seo')
-
-    Seo.config.associate_objects.each do |obj|
+  def self.associate_meta_objects
+    Seo.config.meta_objects.each do |obj|
       obj.class_eval do
         include Seo::SeoConcerns
-        include Seo::Sitemappable
 
         has_one                         :meta, :class_name => Seo::Meta, :as => :meta_data
         accepts_nested_attributes_for   :meta
+      end
+    end
+  end
+
+  def self.associate_sitemap_objects
+    Seo.config.sitemap_objects.each do |obj|
+      obj.class_eval do
+        include Seo::Sitemappable
       end
     end
   end

@@ -1,4 +1,2 @@
-module Seo
-  class ApplicationController < ActionController::Base
-  end
+class Seo::ApplicationController < ApplicationController
 end

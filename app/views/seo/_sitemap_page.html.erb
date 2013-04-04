@@ -1,0 +1,11 @@
+<% local_assigns[:pages].each do |page| %>
+  <li>
+    <a href="<%= page[:page].url %>"><%= page[:page].title %></a>
+
+    <% if page[:children].length > 0 %>
+      <ul>
+        <%= render :partial => "sitemap_page", :locals => { :pages => page[:children] } %>
+      </ul>
+    <% end %>
+  </li>
+<% end %>

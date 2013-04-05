@@ -6,7 +6,7 @@ module Seo
     attr_accessible   :keywords,
                       :description
 
-    validates         :description, :length => { :maximum => 150,
+    validates         :description, :length => { :maximum => 250,
                                                  :too_long => "%{count} characters is the maximum allowed" }
 
   end

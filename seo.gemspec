@@ -7,11 +7,11 @@ require "seo/version"
 Gem::Specification.new do |s|
   s.name        = "seo"
   s.version     = Seo::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Seo."
-  s.description = "TODO: Description of Seo."
+  s.authors     = ["Seb Ashton"]
+  s.email       = ["seb@madebymade.co.uk"]
+  s.homepage    = "http://www.madebymade.co.uk/"
+  s.summary     = "SEO engine."
+  s.description = "Rails engine that provides a polymorphic models to add meta data to pages, and a Sitemap"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]

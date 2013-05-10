@@ -15,15 +15,12 @@ module Seo
     isolate_namespace Seo
 
     initializer :seo do
+      require "active_admin_extension"
+
       ActiveAdmin.application.load_paths.unshift Dir[Seo::Engine.root.join('app', 'admin')] if defined?(ActiveAdmin)
 
-      if !Seo.config.meta_objects.blank?
-        Seo.associate_meta_objects
-      end
-
-      if !Seo.config.sitemap_objects.blank?
-        Seo.associate_sitemap_objects
-      end
+      Seo.associate_meta_objects if !Seo.config.meta_objects.blank?
+      Seo.associate_sitemap_objects if !Seo.config.sitemap_objects.blank?
     end
   end
 

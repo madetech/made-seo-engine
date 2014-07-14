@@ -15,7 +15,7 @@ module Seo
     isolate_namespace Seo
 
     initializer :seo do
-      require "active_admin_extension"
+      require "active_admin_extension_seo"
 
       ActiveAdmin.application.load_paths.unshift Dir[Seo::Engine.root.join('app', 'admin')] if defined?(ActiveAdmin)
 

@@ -5,6 +5,9 @@ module Seo
   mattr_accessor :sitemap_sweeper
   @@sitemap_sweeper = false
 
+  mattr_accessor :engine_active_admin
+  @@engine_active_admin = false
+
   mattr_accessor :meta_objects
   @@meta_objects = []
 
